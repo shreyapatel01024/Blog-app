@@ -1,0 +1,17 @@
+.add-blog-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+.add-blog-form input,
+.add-blog-form button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.ql-editor {
+  min-height: 150px;
+}

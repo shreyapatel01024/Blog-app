@@ -1,0 +1,24 @@
+.dashboard-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.dashboard-email {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.dashboard-blog-box {
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  padding: 40px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
