@@ -1,10 +1,16 @@
-// backend/controllers/postController.js
 const Post = require("../models/Post");
 
-// Create a new blog post
 const createPost = async (req, res) => {
   try {
     const { title, content, tags } = req.body;
+
+    if (!title || !content) {
+      return res.status(400).json({ message: "Title and content are required." });
+    }
+
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "User not authenticated." });
+    }
 
     const image = req.file
       ? {
@@ -16,45 +22,44 @@ const createPost = async (req, res) => {
     const post = new Post({
       title,
       content,
-      tags: tags?.split(",").map((t) => t.trim()),
+      tags: tags ? tags.split(",").map((tag) => tag.trim()) : [],
       image,
-      author: req.user.userId,
+      author: req.user.id,
     });
 
     await post.save();
-    res.status(201).json({ message: "Post created", post });
+
+    res.status(201).json({ message: "Post created successfully", post });
   } catch (err) {
-    console.error("Error creating post:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("❌ Error creating post:", err.message);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
-// Get all posts by the currently logged-in user
 const getMyPosts = async (req, res) => {
   try {
-    const posts = await Post.find({ author: req.user.userId }).sort({ createdAt: -1 });
+    const posts = await Post.find({ author: req.user.id }).sort({ createdAt: -1 });
     res.status(200).json(posts);
   } catch (err) {
-    console.error("Error fetching posts:", err);
-    res.status(500).json({ message: "Failed to fetch posts" });
+    console.error("❌ Error fetching posts:", err.message);
+    res.status(500).json({ message: "Failed to fetch posts", error: err.message });
   }
 };
 
-// Delete a specific post by ID
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ message: "Post not found" });
 
-    if (post.author.toString() !== req.user.userId) {
-      return res.status(403).json({ message: "Not authorized" });
+    if (post.author.toString() !== req.user.id && req.user.role !== "admin") {
+      return res.status(403).json({ message: "Not authorized to delete this post" });
     }
 
     await post.deleteOne();
-    res.status(200).json({ message: "Post deleted" });
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (err) {
-    console.error("Error deleting post:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("❌ Error deleting post:", err.message);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 

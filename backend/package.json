@@ -18,6 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.1",
     "multer": "^2.0.1",
-    "react-quill": "^2.0.0"
+    "react-quill": "^2.0.0",
+    "proxy": "http://localhost:5000"
+
   }
 }

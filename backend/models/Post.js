@@ -17,8 +17,8 @@ const postSchema = new mongoose.Schema({
     default: [],
   },
   image: {
-    data: Buffer,         // Binary data for storing image
-    contentType: String,  // e.g., 'image/jpeg', 'image/png'
+    data: Buffer,
+    contentType: String,
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,4 +31,5 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Post", postSchema);
+// ✅ Use existing model if already compiled
+module.exports = mongoose.models.Post || mongoose.model("Post", postSchema);

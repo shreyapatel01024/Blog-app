@@ -1,17 +1,78 @@
 .add-blog-container {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(to right, #f8f9ff, #e6f7ff);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  animation: popIn 0.5s ease;
 }
 
-.add-blog-form input,
-.add-blog-form button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 10px;
-  font-size: 16px;
+@keyframes popIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-.ql-editor {
-  min-height: 150px;
+.add-blog-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #3f3d56;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.add-blog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-blog-form input[type="text"],
+.add-blog-form input[type="file"],
+.ql-container {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  background-color: #ffffff;
+}
+
+.add-blog-form input[type="text"]:focus,
+.ql-container:focus-within {
+  border-color: #00b4d8;
+  box-shadow: 0 0 5px rgba(0, 180, 216, 0.3);
+}
+
+.image-preview {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn {
+  background: linear-gradient(to right, #00b4d8, #0077b6);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #0077b6, #00b4d8);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 119, 182, 0.3);
 }

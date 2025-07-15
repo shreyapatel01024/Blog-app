@@ -1,14 +1,25 @@
-// frontend/src/pages/Login.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/Auth.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      const role = user.role?.toLowerCase();
+      if (role === "admin") navigate("/admindashboard");
+      else if (role === "user") navigate("/dashboard");
+    }
+  }, []); // ✅ Fix infinite loop
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,10 +29,20 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", form);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      const { token, user } = res.data;
+
+      console.log("✅ Login success:", user);
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
       toast.success("Login successful!");
-      navigate("/dashboard");
+
+      setTimeout(() => {
+        const role = user.role?.toLowerCase();
+        if (role === "admin") navigate("/admindashboard");
+        else navigate("/dashboard");
+      }, 300); // small delay is fine
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed");
     }
@@ -31,7 +52,9 @@ const Login = () => {
     <div className="auth-container">
       <form onSubmit={handleSubmit} className="auth-card">
         <h2>Login</h2>
+
         <input
+          className="auth-input"
           name="email"
           type="email"
           value={form.email}
@@ -39,15 +62,26 @@ const Login = () => {
           placeholder="Email"
           required
         />
-        <input
-          name="password"
-          type="password"
-          value={form.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
+
+        <div className="password-wrapper">
+          <input
+            className="auth-input password-input"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+          />
+          <FontAwesomeIcon
+            icon={showPassword ? faEyeSlash : faEye}
+            className="eye-icon"
+            onClick={() => setShowPassword(!showPassword)}
+          />
+        </div>
+
+        <button type="submit" className="auth-button">Login</button>
+
         <p>
           Don't have an account?{" "}
           <span className="auth-link" onClick={() => navigate("/register")}>

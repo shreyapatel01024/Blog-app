@@ -1,0 +1,234 @@
+/* UserPublicProfile.css */
+
+.user-profile-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background: #f9f9ff;
+  min-height: 100vh;
+}
+
+.user-info-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.user-info-card:hover {
+  transform: translateY(-5px);
+}
+
+.avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #6a5acd;
+}
+
+.user-details h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #4b0082;
+}
+
+.user-details p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.user-stats {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.stat-box {
+  background: #6a5acd;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(106, 90, 205, 0.3);
+}
+
+.subscribe-box .subscribe-btn {
+  background: #ff6f61;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.subscribe-btn.subscribed {
+  background: #4caf50;
+}
+
+.subscribe-btn:hover {
+  background: #ff3b2e;
+}
+
+.user-blogs-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.user-blogs-section h3 {
+  color: #4b0082;
+  margin-bottom: 1.5rem;
+}
+
+.blog-preview {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1.5rem 0;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.blog-preview:last-child {
+  border-bottom: none;
+}
+
+.blog-preview h4 {
+  margin-bottom: 0.5rem;
+  color: #2e2e2e;
+}
+
+.blog-preview p {
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+.blog-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.blog-actions {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+  color: #6a5acd;
+}
+
+.like-count {
+  font-weight: bold;
+  color: #333;
+}
+
+.comments-section {
+  background: #f1f1fa;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.comment {
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reply-comment {
+  background: #f8f4ff;
+}
+
+.reply-to-label {
+  font-size: 0.85rem;
+  color: #6a5acd;
+  margin-bottom: 4px;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.reply-btn,
+.delete-comment {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.reply-input,
+.comment-input {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.reply-input input,
+.comment-input input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.reply-input button,
+.comment-input button {
+  background-color: #6a5acd;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.reply-input button:hover,
+.comment-input button:hover {
+  background-color: #5b4acb;
+}
+
+.comment-replies {
+  margin-top: 0.5rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
