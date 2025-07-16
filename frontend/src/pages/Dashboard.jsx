@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/Dashboard.css";
@@ -166,12 +167,18 @@ const Dashboard = () => {
         <p className="dashboard-email">Email: {user.email}</p>
 
         <div className="dashboard-blog-box">
-          <h3>📢 Blogs from People You Subscribed</h3>
+          {/* <h3>📢 Blogs from People You Subscribed</h3> */}
           {subscribedBlogs.length === 0 ? (
             <p>No blogs found from subscriptions.</p>
           ) : (
             subscribedBlogs.map((blog) => (
-              <div className="blog-preview" key={blog._id}>
+              <motion.div
+                className="blog-preview-card"
+                key={blog._id}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
                 <div className="blog-author-info">
                   <img
                     src={
@@ -187,7 +194,6 @@ const Dashboard = () => {
                     <span
                       className="author-name"
                       onClick={() => navigate(`/profile/${blog.author?._id}`)}
-                      style={{ cursor: "pointer", fontWeight: "bold" }}
                     >
                       {blog.author?.name}
                     </span>
@@ -195,7 +201,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <h4>{blog.title}</h4>
+                <h4 className="blog-title">{blog.title}</h4>
                 {renderImage(blog.image) && (
                   <img
                     src={renderImage(blog.image)}
@@ -203,10 +209,12 @@ const Dashboard = () => {
                     className="blog-image"
                   />
                 )}
-                <p>
+                <p className="blog-content-preview">
                   {blog.content?.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 100)}...
                 </p>
-                <small>🕒 {new Date(blog.createdAt).toLocaleString()}</small>
+                <small className="blog-meta">
+                  🕒 {new Date(blog.createdAt).toLocaleString()}
+                </small>
 
                 <div className="blog-actions">
                   <button
@@ -267,7 +275,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))
           )}
         </div>
